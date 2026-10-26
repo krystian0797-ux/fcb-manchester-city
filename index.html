@@ -97,25 +97,25 @@ td input[type=text],td input[type=number],td select{width:100%;padding:8px;borde
   <div class="purchase-card">
     <div class="label">GOAL</div>
     <div class="value">
-      <div class="metric"><span class="num" id="goalOrdered">5</span><span class="caption">ZAMÓWIONE</span></div>
+      <div class="metric"><span class="num" id="goalOrdered">11</span><span class="caption">ZAMÓWIONE</span></div>
       <div class="metric"><span class="num" id="goalCount">0</span><span class="caption">KUPIONE</span></div>
-      <div class="metric"><span class="num" id="goalRemaining">5</span><span class="caption">ZOSTAŁO</span></div>
+      <div class="metric"><span class="num" id="goalRemaining">11</span><span class="caption">ZOSTAŁO</span></div>
     </div>
   </div>
   <div class="purchase-card">
     <div class="label">CORNER</div>
     <div class="value">
-      <div class="metric"><span class="num" id="cornerOrdered">68</span><span class="caption">ZAMÓWIONE</span></div>
+      <div class="metric"><span class="num" id="cornerOrdered">79</span><span class="caption">ZAMÓWIONE</span></div>
       <div class="metric"><span class="num" id="cornerCount">0</span><span class="caption">KUPIONE</span></div>
-      <div class="metric"><span class="num" id="cornerRemaining">68</span><span class="caption">ZOSTAŁO</span></div>
+      <div class="metric"><span class="num" id="cornerRemaining">79</span><span class="caption">ZOSTAŁO</span></div>
     </div>
   </div>
   <div class="purchase-card">
     <div class="label">LATERAL</div>
     <div class="value">
-      <div class="metric"><span class="num" id="lateralOrdered">27</span><span class="caption">ZAMÓWIONE</span></div>
+      <div class="metric"><span class="num" id="lateralOrdered">42</span><span class="caption">ZAMÓWIONE</span></div>
       <div class="metric"><span class="num" id="lateralCount">0</span><span class="caption">KUPIONE</span></div>
-      <div class="metric"><span class="num" id="lateralRemaining">27</span><span class="caption">ZOSTAŁO</span></div>
+      <div class="metric"><span class="num" id="lateralRemaining">42</span><span class="caption">ZOSTAŁO</span></div>
     </div>
   </div>
   <div class="purchase-card">
@@ -391,6 +391,11 @@ function render(){
    if(totalEl) totalEl.textContent=total;
    if(moneyEl) moneyEl.textContent=moneyFmt(st.money);
  });
+
+ document.getElementById("goalOrdered").textContent=goalOrdered;
+ document.getElementById("cornerOrdered").textContent=cornerOrdered;
+ document.getElementById("lateralOrdered").textContent=lateralOrdered;
+ document.getElementById("lateralLowerOrdered").textContent=lateralLowerOrdered;
 
  document.getElementById("allCount").textContent=ACCOUNTS.length;
  document.getElementById("usedCount").textContent=usedTotal;

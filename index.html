@@ -60,6 +60,22 @@ td input[type=text],td input[type=number],td select{width:100%;padding:8px;borde
 @media(max-width:1050px){.purchase-panel{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.purchase-panel{grid-template-columns:1fr 1fr;gap:8px}.purchase-card{padding:11px 8px}.purchase-card .value{font-size:20px}.purchase-card .metric .caption{font-size:8px}}
 
+
+.order-people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 18px}
+.order-person{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:15px;box-shadow:0 2px 8px #00000012}
+.order-person h3{margin:0 0 12px;font-size:18px}
+.order-person .person-money{font-size:22px;font-weight:900;color:#047857;margin-bottom:12px}
+.order-grid{display:grid;grid-template-columns:1.15fr repeat(3,1fr);gap:0;border-top:1px solid #e2e8f0}
+.order-grid>div{padding:7px 5px;border-bottom:1px solid #eef1f5;font-size:12px}
+.order-grid .head{font-weight:800;color:#64748b;text-transform:uppercase;font-size:10px}
+.order-grid .num{text-align:center;font-weight:800}
+.order-grid .purchased{color:#059669}
+.order-grid .remaining{color:#dc2626}
+.order-total{display:flex;justify-content:space-between;margin-top:10px;font-size:12px;font-weight:800;color:#475569}
+.order-total b{color:#111827}
+.order-for{min-width:150px}
+@media(max-width:1050px){.order-people{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -135,6 +151,45 @@ td input[type=text],td input[type=number],td select{width:100%;padding:8px;borde
   </div>
 </div>
 
+<div class="order-people" aria-live="polite">
+  <div class="order-person">
+    <h3>KRYSTIAN</h3>
+    <div class="person-money">Wydano: <span id="personMoneyKrystian">0,00</span> €</div>
+    <div class="order-grid">
+      <div class="head">Sektor</div><div class="head num">Zamówione</div><div class="head num">Kupione</div><div class="head num">Zostało</div>
+      <div>GOAL</div><div class="num">5</div><div class="num purchased" id="krystianGoalPurchased">0</div><div class="num remaining" id="krystianGoalRemaining">5</div>
+      <div>CORNER</div><div class="num">68</div><div class="num purchased" id="krystianCornerPurchased">0</div><div class="num remaining" id="krystianCornerRemaining">68</div>
+      <div>LATERAL</div><div class="num">27</div><div class="num purchased" id="krystianLateralPurchased">0</div><div class="num remaining" id="krystianLateralRemaining">27</div>
+      <div>LATERAL LOWER</div><div class="num">19</div><div class="num purchased" id="krystianLateralLowerPurchased">0</div><div class="num remaining" id="krystianLateralLowerRemaining">19</div>
+    </div>
+    <div class="order-total"><span>RAZEM</span><b><span id="krystianTotalPurchased">0</span> / 119 szt.</b></div>
+  </div>
+  <div class="order-person">
+    <h3>CZAREK</h3>
+    <div class="person-money">Wydano: <span id="personMoneyCzarek">0,00</span> €</div>
+    <div class="order-grid">
+      <div class="head">Sektor</div><div class="head num">Zamówione</div><div class="head num">Kupione</div><div class="head num">Zostało</div>
+      <div>GOAL</div><div class="num">6</div><div class="num purchased" id="czarekGoalPurchased">0</div><div class="num remaining" id="czarekGoalRemaining">6</div>
+      <div>CORNER</div><div class="num">3</div><div class="num purchased" id="czarekCornerPurchased">0</div><div class="num remaining" id="czarekCornerRemaining">3</div>
+      <div>LATERAL</div><div class="num">13</div><div class="num purchased" id="czarekLateralPurchased">0</div><div class="num remaining" id="czarekLateralRemaining">13</div>
+      <div>LATERAL LOWER</div><div class="num">0</div><div class="num purchased" id="czarekLateralLowerPurchased">0</div><div class="num remaining" id="czarekLateralLowerRemaining">0</div>
+    </div>
+    <div class="order-total"><span>RAZEM</span><b><span id="czarekTotalPurchased">0</span> / 22 szt.</b></div>
+  </div>
+  <div class="order-person">
+    <h3>PATRYK</h3>
+    <div class="person-money">Wydano: <span id="personMoneyPatryk">0,00</span> €</div>
+    <div class="order-grid">
+      <div class="head">Sektor</div><div class="head num">Zamówione</div><div class="head num">Kupione</div><div class="head num">Zostało</div>
+      <div>GOAL</div><div class="num">0</div><div class="num purchased" id="patrykGoalPurchased">0</div><div class="num remaining" id="patrykGoalRemaining">0</div>
+      <div>CORNER</div><div class="num">8</div><div class="num purchased" id="patrykCornerPurchased">0</div><div class="num remaining" id="patrykCornerRemaining">8</div>
+      <div>LATERAL</div><div class="num">2</div><div class="num purchased" id="patrykLateralPurchased">0</div><div class="num remaining" id="patrykLateralRemaining">2</div>
+      <div>LATERAL LOWER</div><div class="num">0</div><div class="num purchased" id="patrykLateralLowerPurchased">0</div><div class="num remaining" id="patrykLateralLowerRemaining">0</div>
+    </div>
+    <div class="order-total"><span>RAZEM</span><b><span id="patrykTotalPurchased">0</span> / 10 szt.</b></div>
+  </div>
+</div>
+
 <section class="stats">
 <div class="stat">Wszystkie<b id="allCount">0</b></div>
 <div class="stat">Dostępne<b id="availableCount">0</b></div>
@@ -157,13 +212,13 @@ td input[type=text],td input[type=number],td select{width:100%;padding:8px;borde
 <thead>
 <tr>
 <th>#</th><th>Osoba</th><th>Socio</th><th>Kod</th><th>E-mail</th>
-<th>Wykorzystane</th><th>Sektor</th><th>Ilość sztuk</th><th>Kto kupił</th><th>Nr karty</th><th>Zapłacona cena (€)</th>
+<th>Wykorzystane</th><th>Kupione dla</th><th>Sektor</th><th>Ilość sztuk</th><th>Kto kupił</th><th>Nr karty</th><th>Zapłacona cena (€)</th>
 </tr>
 </thead>
 <tbody id="tbody"></tbody>
 </table>
 </div>
-<div class="note">Liczniki pokazują kolejno: ZAMÓWIONE, KUPIONE oraz ZOSTAŁO DO ZAKUPIENIA. Pozostała liczba nie spada poniżej 0. Podsumowanie wydatków liczy ceny wpisane przy kontach oznaczonych jako WYKORZYSTANE.
+<div class="note">Liczniki pokazują kolejno: ZAMÓWIONE, KUPIONE oraz ZOSTAŁO DO ZAKUPIENIA. Pozostała liczba nie spada poniżej 0. Podsumowanie jest rozdzielone na KRYSTIAN / CZAREK / PATRYK. Przy każdym zakupie wybierz „Kupione dla” — wtedy sztuki i wydane pieniądze schodzą tylko z zamówienia wybranej osoby.
 </main>
 
 <script>
@@ -255,6 +310,14 @@ function render(){
     <td>${esc(a[3])}<br><button class="copy" data-copy="${esc(a[3])}">KOPIUJ</button></td>
     <td class="status"><label><input type="checkbox" data-used="${i}" ${used?"checked":""}> <span class="badge">${used?"WYKORZYSTANE":"DOSTĘPNE"}</span></label></td>
     <td>
+      <select class="order-for" data-field="orderFor" data-i="${i}">
+        <option value="">— wybierz —</option>
+        <option value="KRYSTIAN" ${s.orderFor==="KRYSTIAN"?"selected":""}>KRYSTIAN</option>
+        <option value="CZAREK" ${s.orderFor==="CZAREK"?"selected":""}>CZAREK</option>
+        <option value="PATRYK" ${s.orderFor==="PATRYK"?"selected":""}>PATRYK</option>
+      </select>
+    </td>
+    <td>
       <select data-field="sector" data-i="${i}">
         <option value="">— wybierz —</option>
         <option value="GOAL" ${s.sector==="GOAL"?"selected":""}>GOAL</option>
@@ -271,12 +334,26 @@ function render(){
    tbody.appendChild(tr);
  });
  const usedTotal=ACCOUNTS.filter((_,i)=>get(i).used).length;
+ const PEOPLE={
+   KRYSTIAN:{GOAL:5,CORNER:68,LATERAL:27,"LATERAL LOWER":19},
+   CZAREK:{GOAL:6,CORNER:3,LATERAL:13,"LATERAL LOWER":0},
+   PATRYK:{GOAL:0,CORNER:8,LATERAL:2,"LATERAL LOWER":0}
+ };
+ const personStats={};
+ Object.keys(PEOPLE).forEach(p=>{personStats[p]={GOAL:0,CORNER:0,LATERAL:0,"LATERAL LOWER":0,money:0};});
  const purchased=ACCOUNTS.map((_,i)=>get(i)).filter(s=>s.used);
+ purchased.forEach(s=>{
+   const p=s.orderFor||"KRYSTIAN";
+   if(!personStats[p]) return;
+   const sector=s.sector; const qty=Number(s.qty)||0;
+   if(Object.prototype.hasOwnProperty.call(personStats[p],sector)) personStats[p][sector]+=qty;
+   personStats[p].money+=Number(s.price)||0;
+ });
  const goalTotal=purchased.reduce((sum,s)=>sum+(s.sector==="GOAL"?(Number(s.qty)||0):0),0);
  const cornerTotal=purchased.reduce((sum,s)=>sum+(s.sector==="CORNER"?(Number(s.qty)||0):0),0);
  const lateralTotal=purchased.reduce((sum,s)=>sum+(s.sector==="LATERAL"?(Number(s.qty)||0):0),0);
  const lateralLowerTotal=purchased.reduce((sum,s)=>sum+(s.sector==="LATERAL LOWER"?(Number(s.qty)||0):0),0);
- const goalOrdered=5, cornerOrdered=68, lateralOrdered=27, lateralLowerOrdered=19;
+ const goalOrdered=11, cornerOrdered=79, lateralOrdered=42, lateralLowerOrdered=19;
  const goalRemaining=Math.max(0,goalOrdered-goalTotal);
  const cornerRemaining=Math.max(0,cornerOrdered-cornerTotal);
  const lateralRemaining=Math.max(0,lateralOrdered-lateralTotal);
@@ -295,6 +372,25 @@ function render(){
  document.getElementById("moneyCorner").textContent=moneyFmt(moneyBySector.CORNER);
  document.getElementById("moneyLateral").textContent=moneyFmt(moneyBySector.LATERAL);
  document.getElementById("moneyLateralLower").textContent=moneyFmt(moneyBySector["LATERAL LOWER"]);
+
+ Object.keys(PEOPLE).forEach(p=>{
+   const idMap={KRYSTIAN:"Krystian",CZAREK:"Czarek",PATRYK:"Patryk"};
+   const id=idMap[p];
+   const st=personStats[p], ord=PEOPLE[p];
+   ["GOAL","CORNER","LATERAL","LATERAL LOWER"].forEach(sec=>{
+     const suffix=sec.replace(" ","").replace("GOAL","Goal").replace("CORNER","Corner").replace("LATERAL LOWER","LateralLower").replace("LATERAL","Lateral");
+     const cap=id.charAt(0).toLowerCase()+id.slice(1);
+     const purchasedEl=document.getElementById(cap+suffix+"Purchased");
+     const remainingEl=document.getElementById(cap+suffix+"Remaining");
+     if(purchasedEl) purchasedEl.textContent=st[sec];
+     if(remainingEl) remainingEl.textContent=Math.max(0,ord[sec]-st[sec]);
+   });
+   const total=st.GOAL+st.CORNER+st.LATERAL+st["LATERAL LOWER"];
+   const totalEl=document.getElementById(id.charAt(0).toLowerCase()+id.slice(1)+"TotalPurchased");
+   const moneyEl=document.getElementById("personMoney"+id);
+   if(totalEl) totalEl.textContent=total;
+   if(moneyEl) moneyEl.textContent=moneyFmt(st.money);
+ });
 
  document.getElementById("allCount").textContent=ACCOUNTS.length;
  document.getElementById("usedCount").textContent=usedTotal;
@@ -323,7 +419,7 @@ document.addEventListener("change",function(e){
  const u=e.target.closest("[data-used]");
  if(u){
    const i=+u.getAttribute("data-used");
-   state[key(i)]={...get(i),used:u.checked};
+   state[key(i)]={...get(i),used:u.checked,orderFor:get(i).orderFor||"KRYSTIAN"};
    save();render();return;
  }
  const el=e.target.closest("[data-field]");

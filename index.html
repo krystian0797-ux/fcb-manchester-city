@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FC Barcelona – Manchester City | Konta Socio</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f3f5f8;color:#172033}
+header{background:#111827;color:#fff;padding:22px 18px}
+h1{margin:0 0 6px;font-size:25px}
+.sub{opacity:.8}
+.wrap{max-width:1500px;margin:auto;padding:18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:15px}
+.stat{background:#fff;border-radius:12px;padding:15px;box-shadow:0 2px 8px #00000012}
+.stat b{font-size:25px;display:block}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;background:#fff;padding:14px;border-radius:12px;margin-bottom:15px;box-shadow:0 2px 8px #00000012}
+input,button,select{font:inherit}
+.search{flex:1;min-width:280px;padding:10px;border:1px solid #ccd2dc;border-radius:8px}
+button{border:0;border-radius:8px;padding:9px 12px;cursor:pointer;background:#1d4ed8;color:#fff}
+button.gray{background:#64748b}
+button.red{background:#dc2626}
+button.green{background:#059669}
+.filters button.active{background:#111827}
+.tablebox{background:#fff;border-radius:12px;box-shadow:0 2px 8px #00000012;overflow:auto}
+table{border-collapse:collapse;width:100%;min-width:1100px}
+th,td{padding:10px 9px;border-bottom:1px solid #e7eaf0;text-align:left;vertical-align:middle}
+th{background:#f8fafc;position:sticky;top:0;z-index:1;font-size:13px}
+td input[type=text],td input[type=number],td select{width:100%;padding:8px;border:1px solid #d4d9e2;border-radius:7px;background:#fff}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700}
+.copy{background:#475569;font-size:12px;padding:7px 9px}
+.status{text-align:center}
+.used{background:#ecfdf5}
+.used td{opacity:.78}
+.badge{font-size:12px;padding:5px 8px;border-radius:999px;background:#e2e8f0}
+.used .badge{background:#bbf7d0}
+.note{font-size:12px;color:#64748b;margin-top:10px}
+@media(max-width:700px){.stats{grid-template-columns:1fr}.wrap{padding:10px}}
+.money-summary{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:12px;margin:0 0 15px}
+.money-card{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px #00000012;border:1px solid #e2e8f0}
+.money-card .title{font-size:11px;font-weight:800;letter-spacing:.05em;color:#64748b;text-transform:uppercase;margin-bottom:6px}
+.money-card .amount{font-size:25px;font-weight:900;color:#111827}
+.money-card.total{background:#ecfdf5;border-color:#a7f3d0}
+.money-card.total .amount{color:#047857}
+@media(max-width:1050px){.money-summary{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.money-summary{grid-template-columns:1fr 1fr}.money-card.total{grid-column:1/-1}}
+
+
+.purchase-panel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 18px}
+.purchase-card{background:#fff;color:#172033;border:1px solid #e2e8f0;border-radius:12px;padding:14px 14px 13px;text-align:center;box-shadow:0 2px 7px #0000000b}
+.purchase-card .label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#475569;margin-bottom:12px;line-height:1.2;text-align:left}
+.purchase-card .value{display:grid;grid-template-columns:repeat(3,1fr);gap:0;align-items:start;font-size:25px;font-weight:800;line-height:1.1}
+.purchase-card .metric{display:flex;flex-direction:column;align-items:center;min-width:0}
+.purchase-card .metric + .metric{border-left:1px solid #e2e8f0}
+.purchase-card .metric .num{display:block}
+.purchase-card .metric .caption{display:block;margin-top:6px;font-size:9px;line-height:1;font-weight:800;letter-spacing:.03em;color:#64748b}
+.purchase-card .metric:nth-child(1) .num{color:#334155}
+.purchase-card .metric:nth-child(2) .num{color:#059669}
+.purchase-card .metric:nth-child(3) .num{color:#dc2626}
+@media(max-width:1050px){.purchase-panel{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.purchase-panel{grid-template-columns:1fr 1fr;gap:8px}.purchase-card{padding:11px 8px}.purchase-card .value{font-size:20px}.purchase-card .metric .caption{font-size:8px}}
+
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<h1>FC Barcelona – Manchester City</h1>
+<div class="sub">Zarządzanie kontami Socio • 8 grudnia 2026</div>
+</div>
+</header>
+
+<main class="wrap">
+
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin:-8px 0 14px;font-size:12px;color:#64748b">
+<span><b style="color:#334155">●</b> Zamówione</span>
+<span><b style="color:#059669">●</b> Kupione</span>
+<span><b style="color:#dc2626">●</b> Zostało</span>
+</div>
+<div class="purchase-panel" aria-live="polite">
+  <div class="purchase-card">
+    <div class="label">GOAL</div>
+    <div class="value">
+      <div class="metric"><span class="num" id="goalOrdered">5</span><span class="caption">ZAMÓWIONE</span></div>
+      <div class="metric"><span class="num" id="goalCount">0</span><span class="caption">KUPIONE</span></div>
+      <div class="metric"><span class="num" id="goalRemaining">5</span><span class="caption">ZOSTAŁO</span></div>
+    </div>
+  </div>
+  <div class="purchase-card">
+    <div class="label">CORNER</div>
+    <div class="value">
+      <div class="metric"><span class="num" id="cornerOrdered">68</span><span class="caption">ZAMÓWIONE</span></div>
+      <div class="metric"><span class="num" id="cornerCount">0</span><span class="caption">KUPIONE</span></div>
+      <div class="metric"><span class="num" id="cornerRemaining">68</span><span class="caption">ZOSTAŁO</span></div>
+    </div>
+  </div>
+  <div class="purchase-card">
+    <div class="label">LATERAL</div>
+    <div class="value">
+      <div class="metric"><span class="num" id="lateralOrdered">27</span><span class="caption">ZAMÓWIONE</span></div>
+      <div class="metric"><span class="num" id="lateralCount">0</span><span class="caption">KUPIONE</span></div>
+      <div class="metric"><span class="num" id="lateralRemaining">27</span><span class="caption">ZOSTAŁO</span></div>
+    </div>
+  </div>
+  <div class="purchase-card">
+    <div class="label">LATERAL LOWER</div>
+    <div class="value">
+      <div class="metric"><span class="num" id="lateralLowerOrdered">19</span><span class="caption">ZAMÓWIONE</span></div>
+      <div class="metric"><span class="num" id="lateralLowerCount">0</span><span class="caption">KUPIONE</span></div>
+      <div class="metric"><span class="num" id="lateralLowerRemaining">19</span><span class="caption">ZOSTAŁO</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="money-summary" aria-live="polite">
+  <div class="money-card total">
+    <div class="title">ŁĄCZNIE WYDANO</div>
+    <div class="amount"><span id="moneyTotal">0,00</span> €</div>
+  </div>
+  <div class="money-card">
+    <div class="title">GOAL</div>
+    <div class="amount"><span id="moneyGoal">0,00</span> €</div>
+  </div>
+  <div class="money-card">
+    <div class="title">CORNER</div>
+    <div class="amount"><span id="moneyCorner">0,00</span> €</div>
+  </div>
+  <div class="money-card">
+    <div class="title">LATERAL</div>
+    <div class="amount"><span id="moneyLateral">0,00</span> €</div>
+  </div>
+  <div class="money-card">
+    <div class="title">LATERAL LOWER</div>
+    <div class="amount"><span id="moneyLateralLower">0,00</span> €</div>
+  </div>
+</div>
+
+<section class="stats">
+<div class="stat">Wszystkie<b id="allCount">0</b></div>
+<div class="stat">Dostępne<b id="availableCount">0</b></div>
+<div class="stat">Wykorzystane<b id="usedCount">0</b></div>
+</section>
+
+<section class="toolbar">
+<input id="search" class="search" placeholder="Szukaj: imię, Socio, kod, e-mail, kupujący, karta, cena...">
+<div class="filters">
+<button class="active" data-filter="all">Wszystkie</button>
+<button data-filter="available">Dostępne</button>
+<button data-filter="used">Wykorzystane</button>
+</div>
+<button class="gray" id="resetBtn">Reset statusów</button>
+<button class="red" id="clearBtn">Usuń wszystkie dane</button>
+</section>
+
+<div class="tablebox">
+<table>
+<thead>
+<tr>
+<th>#</th><th>Osoba</th><th>Socio</th><th>Kod</th><th>E-mail</th>
+<th>Wykorzystane</th><th>Sektor</th><th>Ilość sztuk</th><th>Kto kupił</th><th>Nr karty</th><th>Zapłacona cena (€)</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+<div class="note">Liczniki pokazują kolejno: ZAMÓWIONE, KUPIONE oraz ZOSTAŁO DO ZAKUPIENIA. Pozostała liczba nie spada poniżej 0. Podsumowanie wydatków liczy ceny wpisane przy kontach oznaczonych jako WYKORZYSTANE.
+</main>
+
+<script>
+(function(){
+"use strict";
+
+const ACCOUNTS = [
+["RANDOM","749379","2369","krystian0797@gmail.com"],
+["TREMBUŁA","748728","2109","info.ktorysektor@gmail.com"],
+["KĘDRA","736078","7856","krizibbc@gmail.com"],
+["VANE","749300","1198","aservicezamosc@gmail.com"],
+["OLKA","749299","1198","aamms14@wp.pl"],
+["PATRYK","753509","1198","interbileciki@gmail.com"],
+["ERNEST","758623","6162","milanbilety@gmail.com"],
+["TOMEK","681687","2334","acmilanbilety@gmail.com"],
+["TOMEK","701563","5428","biletyacmilan42@gmail.com"],
+["TOMEK","729343","4758","acmilanbilety964@gmail.com"],
+["TOMEK","743900","3359","biletynaacmilan@gmail.com"],
+["TOMEK","747406","0886","goaljurney25@gmail.com"],
+["TOMEK","747492","2323","KrystianBarton@pm.me"],
+["TOMEK","748186","7955","KrystianBarton@proton.me"],
+["AGNIESZKA","758682","2647","bilety.barca@proton.me"],
+["KIERPKA","748433","1905","popekcezary@proton.me"],
+["KIERPKA","749335","8888","makelele42@proton.me"],
+["KIERPKA","749384","7077","zidane97@proton.me"],
+["KIERPKA","749532","9998","lukamodric97@proton.me"],
+["KIERPKA","749572","7077","aleksdelpiero10@proton.me"],
+["KIERPKA","750959","0959","zlatan9710@proton.me"],
+["KIERPKA","750962","0959","totti97@proton.me"],
+["KIERPKA","750964","7077","rivaldo9710@proton.me"],
+["KIERPKA","750965","0959","bellingam10@proton.me"],
+["KIERPKA","750966","0959","messi9710@proton.me"],
+["KIERPKA","750970","0959","ronaldinho092@proton.me"],
+["KIERPKA","750973","0959","cristianoronaldo977@proton.me"],
+["KIERPKA","751026","0959","cristianoronaldo7782@proton.me"],
+["KIERPKA","751029","0959","materazzi23@proton.me"]
+];
+
+const KEY="fcb_mc_socio_final_1";
+let state={};
+let filter="all";
+
+function load(){
+  try { state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }
+  catch(e){ state={}; }
+}
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){} }
+function key(i){return ACCOUNTS[i][1]+"_"+ACCOUNTS[i][2];}
+function get(i){return state[key(i)]||{};}
+function esc(v){
+ return String(v??"").replace(/[&<>"']/g,function(c){
+   return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+ });
+}
+async function copyText(text){
+ try{
+   if(navigator.clipboard && window.isSecureContext){
+     await navigator.clipboard.writeText(text);
+   }else{
+     const t=document.createElement("textarea");
+     t.value=text;t.style.position="fixed";t.style.left="-9999px";
+     document.body.appendChild(t);t.focus();t.select();
+     document.execCommand("copy");t.remove();
+   }
+ }catch(e){ alert("Nie udało się skopiować. Skopiuj ręcznie: "+text); }
+}
+
+function render(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ const tbody=document.getElementById("tbody");
+ tbody.innerHTML="";
+ let visible=0;
+
+ ACCOUNTS.forEach((a,i)=>{
+   const s=get(i), used=!!s.used;
+   const hay=(a.join(" ")+" "+(s.buyer||"")+" "+(s.card||"")+" "+(s.price||"")).toLowerCase();
+   if(q && !hay.includes(q)) return;
+   if(filter==="available" && used) return;
+   if(filter==="used" && !used) return;
+   visible++;
+
+   const tr=document.createElement("tr");
+   if(used) tr.className="used";
+   tr.innerHTML=`
+    <td>${i+1}</td>
+    <td><b>${esc(a[0])}</b></td>
+    <td class="mono">${esc(a[1])}<br><button class="copy" data-copy="${esc(a[1])}">KOPIUJ</button></td>
+    <td class="mono">${esc(a[2])}<br><button class="copy" data-copy="${esc(a[2])}">KOPIUJ</button></td>
+    <td>${esc(a[3])}<br><button class="copy" data-copy="${esc(a[3])}">KOPIUJ</button></td>
+    <td class="status"><label><input type="checkbox" data-used="${i}" ${used?"checked":""}> <span class="badge">${used?"WYKORZYSTANE":"DOSTĘPNE"}</span></label></td>
+    <td>
+      <select data-field="sector" data-i="${i}">
+        <option value="">— wybierz —</option>
+        <option value="GOAL" ${s.sector==="GOAL"?"selected":""}>GOAL</option>
+        <option value="CORNER" ${s.sector==="CORNER"?"selected":""}>CORNER</option>
+        <option value="LATERAL" ${s.sector==="LATERAL"?"selected":""}>LATERAL</option>
+        <option value="LATERAL LOWER" ${s.sector==="LATERAL LOWER"?"selected":""}>LATERAL LOWER</option>
+      </select>
+    </td>
+    <td><input type="number" min="0" step="1" data-field="qty" data-i="${i}" value="${esc(s.qty??"")}" placeholder="szt."></td>
+    <td><input type="text" data-field="buyer" data-i="${i}" value="${esc(s.buyer||"")}" placeholder="Imię i nazwisko"></td>
+    <td><input type="text" data-field="card" data-i="${i}" value="${esc(s.card||"")}" placeholder="np. 1234"></td>
+    <td><input type="number" min="0" step="0.01" data-field="price" data-i="${i}" value="${esc(s.price??"")}" placeholder="€"></td>
+   `;
+   tbody.appendChild(tr);
+ });
+ const usedTotal=ACCOUNTS.filter((_,i)=>get(i).used).length;
+ const purchased=ACCOUNTS.map((_,i)=>get(i)).filter(s=>s.used);
+ const goalTotal=purchased.reduce((sum,s)=>sum+(s.sector==="GOAL"?(Number(s.qty)||0):0),0);
+ const cornerTotal=purchased.reduce((sum,s)=>sum+(s.sector==="CORNER"?(Number(s.qty)||0):0),0);
+ const lateralTotal=purchased.reduce((sum,s)=>sum+(s.sector==="LATERAL"?(Number(s.qty)||0):0),0);
+ const lateralLowerTotal=purchased.reduce((sum,s)=>sum+(s.sector==="LATERAL LOWER"?(Number(s.qty)||0):0),0);
+ const goalOrdered=5, cornerOrdered=68, lateralOrdered=27, lateralLowerOrdered=19;
+ const goalRemaining=Math.max(0,goalOrdered-goalTotal);
+ const cornerRemaining=Math.max(0,cornerOrdered-cornerTotal);
+ const lateralRemaining=Math.max(0,lateralOrdered-lateralTotal);
+ const lateralLowerRemaining=Math.max(0,lateralLowerOrdered-lateralLowerTotal);
+ 
+ const moneyBySector={GOAL:0,CORNER:0,LATERAL:0,"LATERAL LOWER":0};
+ let moneyTotal=0;
+ purchased.forEach(s=>{
+   const amount=Number(s.price)||0;
+   moneyTotal+=amount;
+   if(Object.prototype.hasOwnProperty.call(moneyBySector,s.sector)) moneyBySector[s.sector]+=amount;
+ });
+ const moneyFmt=n=>n.toLocaleString("pl-PL",{minimumFractionDigits:2,maximumFractionDigits:2});
+ document.getElementById("moneyTotal").textContent=moneyFmt(moneyTotal);
+ document.getElementById("moneyGoal").textContent=moneyFmt(moneyBySector.GOAL);
+ document.getElementById("moneyCorner").textContent=moneyFmt(moneyBySector.CORNER);
+ document.getElementById("moneyLateral").textContent=moneyFmt(moneyBySector.LATERAL);
+ document.getElementById("moneyLateralLower").textContent=moneyFmt(moneyBySector["LATERAL LOWER"]);
+
+ document.getElementById("allCount").textContent=ACCOUNTS.length;
+ document.getElementById("usedCount").textContent=usedTotal;
+ document.getElementById("availableCount").textContent=ACCOUNTS.length-usedTotal;
+ document.getElementById("goalCount").textContent=goalTotal;
+ document.getElementById("cornerCount").textContent=cornerTotal;
+ document.getElementById("lateralCount").textContent=lateralTotal;
+ document.getElementById("lateralLowerCount").textContent=lateralLowerTotal;
+ document.getElementById("goalRemaining").textContent=goalRemaining;
+ document.getElementById("cornerRemaining").textContent=cornerRemaining;
+ document.getElementById("lateralRemaining").textContent=lateralRemaining;
+ document.getElementById("lateralLowerRemaining").textContent=lateralLowerRemaining;
+}
+
+document.addEventListener("click",function(e){
+ const c=e.target.closest("[data-copy]");
+ if(c){copyText(c.getAttribute("data-copy"));return;}
+ const f=e.target.closest("[data-filter]");
+ if(f){
+   filter=f.getAttribute("data-filter");
+   document.querySelectorAll("[data-filter]").forEach(x=>x.classList.remove("active"));
+   f.classList.add("active");render();
+ }
+});
+document.addEventListener("change",function(e){
+ const u=e.target.closest("[data-used]");
+ if(u){
+   const i=+u.getAttribute("data-used");
+   state[key(i)]={...get(i),used:u.checked};
+   save();render();return;
+ }
+ const el=e.target.closest("[data-field]");
+ if(el){
+   const i=+el.getAttribute("data-i"), field=el.getAttribute("data-field");
+   state[key(i)]={...get(i),[field]:el.value};
+   save();
+ }
+});
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("resetBtn").addEventListener("click",function(){
+ if(!confirm("Zresetować statusy i dane kupujących, kart oraz cen?")) return;
+ state={};save();render();
+});
+document.getElementById("clearBtn").addEventListener("click",function(){
+ if(!confirm("Na pewno usunąć wszystkie zapisane dane tej aplikacji?")) return;
+ state={};save();render();
+});
+load();render();
+})();
+</script>
+</body>
+</html>
